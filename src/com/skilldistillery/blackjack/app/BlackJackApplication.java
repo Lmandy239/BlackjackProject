@@ -13,11 +13,11 @@ import com.skilldistillery.blackjack.entities.Player;
 public class BlackJackApplication {
 	private Scanner keyboard;
 	Deck deck = new Deck();
+	 private Player player = new Player();
+	 private Dealer dealer = new Dealer();
 
 	public static void main(String[] args) {
 		BlackJackApplication app = new BlackJackApplication();
-		Player player = new Player();
-		Dealer dealer = new Dealer();
 
 		
 		
@@ -51,19 +51,42 @@ public class BlackJackApplication {
 	}
 
 	public void startMatch() {
-		shuffle();
+		String answer;
+		System.out.println("Your Deck: ");
+		player.getHandValue();
+		System.out.println();
+		System.out.println("The dealers deck: ");
+		dealer.getHandValue();
 		
+		System.out.println("Would you like to (S)tand or (H)it?: (S or H)");
+		answer = keyboard.next();
+		do {	
+			System.out.println("Would you like to (S)tand or (H)it?: (S or H)");
+		if (answer.equalsIgnoreCase("S")) {
 
+			stand();
+
+		} else if (answer.equalsIgnoreCase("H")) {
+			Hit();
+		} 
+		
+		break;
+		}while(!answer.equals("Y") && !answer.equalsIgnoreCase("N"));
+		
+		
+		
+		
 	}
 
-	public void shuffle() {
-		deck.shuffle();
-
-		
-	}
 
 	public void stand() {
 	   
+		System.out.println("You chose to stand");
+		
+	}
+	
+	public void Hit() {
+		System.out.println("You chose to Hit");
 	}
 	
 }

@@ -7,8 +7,7 @@ public class BlackjackHand extends Hand {
 
 	@Override
 	public void addCard(List<Card> cards) {
-		// TODO Auto-generated method stub
-		
+				
 	}
 
 

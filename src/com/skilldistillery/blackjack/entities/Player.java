@@ -2,6 +2,7 @@ package com.skilldistillery.blackjack.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Player extends Hand {
 	private Hand hand = new BlackjackHand();
@@ -20,6 +21,7 @@ public class Player extends Hand {
 	@Override
 	public void getHandValue() {
 		int initialValue = 0;
+		deck.shuffle();
 		List<Card> hand = new ArrayList<>();
 
 		for (int i = 0; i < 2; i++) {
@@ -40,10 +42,30 @@ public class Player extends Hand {
 	}
 
 
+	public void shuffle() {
+		deck.shuffle();
+
+		
+	}
 	@Override
 	public String toString() {
 		
 		return hand.toString();
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(deck, hand);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		return Objects.equals(deck, other.deck) && Objects.equals(hand, other.hand);
 	}
 
 }

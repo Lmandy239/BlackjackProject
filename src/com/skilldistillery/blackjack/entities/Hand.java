@@ -1,7 +1,6 @@
 package com.skilldistillery.blackjack.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public abstract class Hand {
 
