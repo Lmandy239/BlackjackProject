@@ -8,16 +8,11 @@ public abstract class Hand{
 	protected List<Card> cards;
 
 	public Hand() {
-
+		cards = new ArrayList<>();
 	}
-	public List<Card> getHandValue() {
-		return null;
-		
-		
-	}
+	public abstract int getHandValue();
 	
 	public void addCard(Card card){
-		cards = new ArrayList<>();
 		cards.add(card);
 	}
 	
@@ -27,11 +22,17 @@ public abstract class Hand{
 	
 
 
+	public List<Card> getCards() {
+		return cards;
+	}
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
+	}
+	
 	@Override
 	public String toString() {
-		return "Hand: " + cards + "";
+		return cards + "";
 	}
-
 
 
 	                                 
