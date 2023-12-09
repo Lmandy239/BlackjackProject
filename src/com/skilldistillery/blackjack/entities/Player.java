@@ -2,70 +2,44 @@ package com.skilldistillery.blackjack.entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Player extends Hand {
-	private Hand hand = new BlackjackHand();
-	Deck deck = new Deck();
-
+	protected List<Card> cards;
 	public Player() {
-
+		cards = new ArrayList<>(52);
 	}
 	@Override
-	public void addCard(List<Card> cards) {
-		
-		hand.addCard(cards);
-		
-	}
-
-	@Override
-	public void getHandValue() {
-		int initialValue = 0;
+	public List<Card> getHandValue() {
+		int InitialValue = 0;
+		Deck deck = new Deck();
 		deck.shuffle();
 		List<Card> hand = new ArrayList<>();
-
 		for (int i = 0; i < 2; i++) {
-			Card c = deck.dealCard();
-			initialValue += c.getValue();
-			hand.add(c);
+			Card cardDeal = deck.dealCard();
+			InitialValue += cardDeal.getValue();
+			hand.add(cardDeal);
 
 		}
-		printHandAndValue(hand, initialValue);
 
+		printHandAndValue(hand, InitialValue);
+		return hand;
 	}
 
-	public void printHandAndValue(List<Card> hand, int value) {
+	private void printHandAndValue(List<Card> hand, int initialValue) {
+	
+		if(initialValue <=21) {
 		for (Card card : hand) {
-			System.out.println(card);
-		}
-		System.out.println("Total value: " + value);
+		   System.out.println(card);
+    }
+    System.out.println("Total value: " + initialValue);
+	}else {
+		getHandValue();
 	}
-
-
-	public void shuffle() {
-		deck.shuffle();
-
+}
+	public void addCard(Card card){
 		
+		cards.add(card);
 	}
-	@Override
-	public String toString() {
-		
-		return hand.toString();
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(deck, hand);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Player other = (Player) obj;
-		return Objects.equals(deck, other.deck) && Objects.equals(hand, other.hand);
-	}
+
 
 }

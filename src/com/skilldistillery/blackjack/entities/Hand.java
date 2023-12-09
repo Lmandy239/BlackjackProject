@@ -1,24 +1,42 @@
 package com.skilldistillery.blackjack.entities;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Hand {
+public abstract class Hand{
 
 	protected List<Card> cards;
 
 	public Hand() {
-	}
-
-
-	public void getHandValue() {
 
 	}
+	public List<Card> getHandValue() {
+		return null;
+		
+		
+	}
+	
+	public void addCard(Card card){
+		cards = new ArrayList<>();
+		cards.add(card);
+	}
+	
+	public void clearHand() {
+		cards.removeAll(cards);
+	}
+	
+
 
 	@Override
 	public String toString() {
-		return "Your cards: " + cards;
+		return "Hand: " + cards + "";
 	}
 
-	public abstract void addCard(List<Card> cards);
+
+
+	                                 
+	
+	
+
 
 }
