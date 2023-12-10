@@ -148,7 +148,7 @@ public class BlackJackApplication {
 			System.out.println("You win!");
 			finalValue();
 			
-		} else if (playerHandValue < 17) {
+		} else if (playerHandValue < 21) {
 			playerHand();
 			System.out.println("Would you like to (H)it or (S)tand?");
 			answer = keyboard.next();
