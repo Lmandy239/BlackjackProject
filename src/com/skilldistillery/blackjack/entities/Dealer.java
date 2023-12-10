@@ -9,21 +9,17 @@ public class Dealer extends Player {
 
 	private Deck deck = new Deck();
 
-
 	public Dealer() {
 		super();
 	}
 
-	
 	public Deck getDeck() {
 		return deck;
 	}
 
-
 	public void setDeck(Deck deck) {
 		this.deck = deck;
 	}
-
 
 	public int checkDeckSize() {
 		return deck.checkDeckSize();
@@ -37,8 +33,16 @@ public class Dealer extends Player {
 	public void shuffle() {
 		deck.shuffle();
 	}
+
+	
+
 	public void dealersTurn() {
-		
+
+		while (getHand().getHandValue() < 17) {
+			 
+			addCard(dealCard());
+			
+		}
 	}
 
 	@Override
@@ -48,7 +52,6 @@ public class Dealer extends Player {
 		result = prime * result + Objects.hash(deck);
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -62,10 +65,9 @@ public class Dealer extends Player {
 		return Objects.equals(deck, other.deck);
 	}
 
-
 	@Override
 	public String toString() {
-		return getHand() + "";
+		return "[Card face down and: " + getHand() + "]";
 	}
 
 }

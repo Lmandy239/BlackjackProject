@@ -2,7 +2,7 @@ package com.skilldistillery.blackjack.entities;
 
 import java.util.Objects;
 
-public class Player {
+public class Player{
 	protected Hand hand = new BlackjackHand();
 
 	public Player() {
@@ -11,6 +11,11 @@ public class Player {
 
 	public void addCard(Card card) {
 		hand.addCard(card);
+	
+	}
+	
+	public void playerTurn() {
+		
 	}
 
 	public Hand getHand() {
@@ -43,5 +48,6 @@ public class Player {
 	public String toString() {
 		return "" + getHand();
 	}
+
 
 }

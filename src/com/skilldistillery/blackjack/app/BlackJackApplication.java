@@ -1,13 +1,8 @@
 package com.skilldistillery.blackjack.app;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import com.skilldistillery.blackjack.entities.Card;
 import com.skilldistillery.blackjack.entities.Dealer;
-import com.skilldistillery.blackjack.entities.Deck;
-import com.skilldistillery.blackjack.entities.Hand;
 import com.skilldistillery.blackjack.entities.Player;
 
 public class BlackJackApplication {
@@ -53,21 +48,26 @@ public class BlackJackApplication {
 		player.addCard(dealer.dealCard());
 
 		dealer.addCard(dealer.dealCard());
-		dealer.addCard(dealer.dealCard());
+//		dealer.addCard(dealer.dealCard());
 
 		playerHand();
 		System.out.println("\n..................................................... \n");
 		dealerHand();
+		dealer.dealersTurn();
+		playerTurn();
 
+	}
+
+	public void playerTurn() {
 		String answer;
 		do {
 			System.out.println("Would you like to (S)tand or (H)it?: (S or H)");
 			answer = keyboard.next();
 
 			if (answer.equalsIgnoreCase("S")) {
-//		        stand();
+				stand();
 			} else if (answer.equalsIgnoreCase("H")) {
-
+				hit();
 			} else {
 				System.out.println("Invalid input. Please enter either 'S' or 'H'.");
 			}
@@ -87,28 +87,82 @@ public class BlackJackApplication {
 
 	}
 
-//	public void stand() {
-//	   
-//	    System.out.println("You chose to stand");
-//
-//	    int playerValue = player.getHand();
-//	    int dealerValue = dealer.getHand();
-//
-//	    System.out.println("Your hand value: " + playerValue);
-//	    System.out.println("Dealer's hand value: " + dealerValue);
-//
-//	    if (playerValue > 21) {
-//	        System.out.println("Bust! You lose.");
-//	    } else if (dealerValue > 21) {
-//	        System.out.println("Dealer busts! You win.");
-//	    } else if (playerValue > dealerValue) {
-//	        System.out.println("You win!");
-//	    } else if (playerValue < dealerValue) {
-//	        System.out.println("You lose.");
-//	    } else {
-//	        System.out.println("It's a tie!");
-//	    }
-//	}
-//	
+	public void finalValue() {
+		System.out.println("Final hands:");
+		System.out.println("Your hand: " + player.getHand());
+		System.out.println("Dealer's hand: " + dealer.getHand());
 
+	}
+
+	public void stand() {
+		finalValue();
+		int playerHandValue = player.getHand().getHandValue();
+		int dealerHandValue = dealer.getHand().getHandValue();
+
+		if (playerHandValue > 21) {
+			System.out.println("You busted! Dealer wins.");
+		} else if (dealerHandValue > 21) {
+			System.out.println("Dealer busted! You win.");
+		} else if (playerHandValue == dealerHandValue) {
+			System.out.println("It's a push. No one wins.");
+		} else if (playerHandValue == 21) {
+			System.out.println("Blackjack! You win!");
+		} else if (dealerHandValue == 21) {
+			System.out.println("Dealer has Blackjack. Dealer wins.");
+		} else if (playerHandValue > dealerHandValue) {
+			System.out.println("You win!");
+		} else {
+			System.out.println("Dealer wins.");
+		}
+
+	}
+
+	public void hit() {
+		String answer;
+
+		player.addCard(dealer.dealCard());
+
+		int playerHandValue = player.getHand().getHandValue();
+		int dealerHandValue = dealer.getHand().getHandValue();
+
+		if (playerHandValue > 21) {
+			System.out.println("You busted! Dealer wins.");
+			finalValue();
+		} else if (dealerHandValue > 21) {
+			System.out.println("Dealer busted! You win.");
+			finalValue();
+		
+		} else if (playerHandValue == dealerHandValue) {
+			
+			System.out.println("It's a push. No one wins.");
+			finalValue();
+		} else if (playerHandValue == 21) {
+			System.out.println("Blackjack! You win!");
+			finalValue();
+			
+		} else if (dealerHandValue == 21) {
+			System.out.println("Dealer has Blackjack. Dealer wins.");
+			finalValue();
+			
+		} else if (playerHandValue > dealerHandValue) {
+			System.out.println("You win!");
+			finalValue();
+			
+		} else if (playerHandValue < 17) {
+			playerHand();
+			System.out.println("Would you like to (H)it or (S)tand?");
+			answer = keyboard.next();
+			if (answer.equalsIgnoreCase("S")) {
+				stand();
+			} else if(answer.equalsIgnoreCase("H")) {
+				hit();
+			}
+		} else {
+			finalValue();
+			System.out.println("Dealer wins.");
+		}
+
+//
+
+	}
 }
